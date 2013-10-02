@@ -6,12 +6,20 @@
  */ 
 
 
-#include <avr/io.h>
+#include "Robot.h"
 
 int main(void)
 {
+	// Initialisations
+	I2C_Init();
+	
     while(1)
     {
         //TODO:: Please write your application code 
     }
+}
+
+void ioInit( void )
+{
+	
 }
