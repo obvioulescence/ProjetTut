@@ -10,7 +10,7 @@
 void I2C_Init(void)
 {
    
-	PRR0&=~(1<<PRTWI); // enables the I2C module
+	PRR&=~(1<<PRTWI); // enables the I2C module
 
 // Enable internal pull up for SDA et SCL pins
 	/*MCUCR &=~(1<<PUD);

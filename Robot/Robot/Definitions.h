@@ -2,7 +2,7 @@
  * Definitions.h
  *
  * Created: 16/04/2013 10:07:40
- *  Author: HéliX
+ *  Author: ClementC
  */ 
 
 #define F_CPU 16000000UL

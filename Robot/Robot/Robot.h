@@ -2,7 +2,7 @@
  * Robot.h
  *
  * Created: 02/10/2013 14:40:45
- *  Author: HéliX
+ *  Author: ClementC
  */ 
 
 #include "Definitions.h"
@@ -11,16 +11,24 @@
 #define ROBOT_H_
 
 //==========================================================
+//================= VARIABLES GLOBALES =====================
 //==========================================================
+
+extern volatile uint64_t microseconds;		// compteur de microsecondes
+extern volatile uint16_t RC_Values[5];		// tableau contenant les microsecondes des impulsions radio
+
 
 // initialisation des entrées sorties
 void ioInit(void);
 
-// initialisation de la réception RC
-void ReceptionRCInit(void);
+/* prototypes des fonctions dédiées à la gestion des servos */
+void ServoInit(void);
 
-/* prototypes des fonctions dédiées au timer0 */
-void timer0_Init(void);
+/* prototypes des fonctions dédiées au timer1 */
+void timer1_Init(void);
+
+/* prototypes des fonctions dédiées au timer2 */
+void timer2_Init(void);
 
 /* prototypes des fonctions dédiées à l'i²C */
 void I2C_Init(void);
