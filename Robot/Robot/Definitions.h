@@ -22,9 +22,11 @@
 //definition.h
 #define UBRRVAL0	8	// XBee baud rate 115200
 
-#define PITCH		0		// X = pitch
-#define ROLL		1		// Y = roll
-#define YAW			2		// Z = yaw
+#define X			0
+#define Y			1
+#define Z			2
+
+#define NB_CHAN_RC	5
 
 // I2C status definition
 #define STATUS_START			0x08

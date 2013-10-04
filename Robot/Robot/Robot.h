@@ -14,7 +14,13 @@
 //==========================================================
 
 // initialisation des entrées sorties
-void ioInit( void );
+void ioInit(void);
+
+// initialisation de la réception RC
+void ReceptionRCInit(void);
+
+/* prototypes des fonctions dédiées au timer0 */
+void timer0_Init(void);
 
 /* prototypes des fonctions dédiées à l'i²C */
 void I2C_Init(void);
