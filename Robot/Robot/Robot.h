@@ -23,15 +23,17 @@ extern volatile uint16_t camPosition[2];	// position de la caméra X Z
 // initialisation des entrées sorties
 void ioInit(void);
 
-/* prototypes des fonctions dédiées à la gestion des servos */
+/* prototypes des fonctions dédiées à la gestion des servos ; Angle entre 63 et 125*/
 void ServoInit(void);
+void WriteServo(uint8_t Angle_X, uint8_t Angle_Z);
 
 /* prototypes des fonctions dédiées à la gestion de la caméra */
 void RequireCamPosition(void);
 bool ReceiveCamPosition(void);
 void WriteCamPosition(void);
 
-/*  */
+/* fonctions dédiés à la gestion des capteurs */
+void AcquireDataSensor(void);
 void SendDataSensor(void);
 
 /* prototypes des fonctions dédiées au timer1 */

@@ -10,7 +10,7 @@
 volatile uint64_t microseconds    =  0;
 volatile uint16_t RC_Values[5]    = {0};
 volatile bool     receptionRC_OK  = false;
-volatile uint16_t camPosition[2]  = {1500, 1500};
+volatile uint16_t camPosition[2]  = {94, 94};
 
 int main(void)
 {
@@ -32,6 +32,7 @@ int main(void)
 			RequireCamPosition();		// Demande de données sur la commande de la caméra
 			ReceiveCamPosition();		// Routine de réception des données séries
 			
+			AcquireDataSensor();
 			SendDataSensor();
 			
 			receptionRC_OK = false;
@@ -49,6 +50,11 @@ void timer1_Init(void)
 	TCCR1A = 0x12; // COM1A1 | COM1B1 | WGM11 | WGM10
 	TCCR1B = 0x4C; // ICES1  | WGM12  | CS12
 	TIMSK1 = 0x20; // ICIE1
+}
+
+void AcquireDataSensor(void)
+{
+	
 }
 
 void SendDataSensor(void)

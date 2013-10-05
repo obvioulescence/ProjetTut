@@ -43,5 +43,5 @@ bool ReceiveCamPosition(void)
 
 void WriteCamPosition(void)
 {
-	
+	WriteServo(camPosition[0], camPosition[1]);
 }

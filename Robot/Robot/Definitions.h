@@ -27,6 +27,9 @@
 
 #define NB_CHAN_RC	5
 
+#define SERVO_X		OCR1A
+#define SERVO_Z		OCR1B
+
 // I2C status definition
 #define STATUS_START			0x08
 #define STATUS_RESTART			0x10
