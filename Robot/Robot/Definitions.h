@@ -15,7 +15,6 @@
 #include <avr/interrupt.h>
 #include <math.h>
 
-
 #ifndef DEFINITIONS_H_
 #define DEFINITIONS_H_
 

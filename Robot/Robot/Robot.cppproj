@@ -121,6 +121,12 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Camera.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="RC.cpp">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Servo.cpp">
       <SubType>compile</SubType>
     </Compile>
@@ -136,7 +142,7 @@
     <Compile Include="Robot.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Servo.h">
+    <Compile Include="XBee.cpp">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>

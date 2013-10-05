@@ -5,11 +5,12 @@
  *  Author: ClementC
  */ 
 
-
 #include "Robot.h"
 
 volatile uint64_t microseconds    =  0;
 volatile uint16_t RC_Values[5]    = {0};
+volatile bool     receptionRC_OK  = false;
+volatile uint16_t camPosition[2]  = {1500, 1500};
 
 int main(void)
 {
@@ -18,6 +19,7 @@ int main(void)
 	// Initialisations
 	ioInit();
 	I2C_Init();
+	Xbee_Init();
 	timer1_Init();
 	ServoInit();
 	
@@ -25,7 +27,15 @@ int main(void)
 	
     while(1)
     {
-		
+		if (receptionRC_OK)
+		{
+			RequireCamPosition();		// Demande de données sur la commande de la caméra
+			ReceiveCamPosition();		// Routine de réception des données séries
+			
+			SendDataSensor();
+			
+			receptionRC_OK = false;
+		}
     }
 }
 
@@ -41,47 +51,14 @@ void timer1_Init(void)
 	TIMSK1 = 0x20; // ICIE1
 }
 
-ISR(TIMER1_CAPT_vect)
+void SendDataSensor(void)
 {
-	volatile static uint16_t RC_Values_LAST = 0;
-	volatile static uint8_t  Channel		= 0;
-	volatile        uint16_t temp			= 0;
-
-	temp = ICR1;
-	Channel++;
-
-	switch (Channel)
-	{
-		case 1: break;
-		
-		case 2: if (temp > RC_Values_LAST) RC_Values[Channel-1] = temp-RC_Values_LAST;
-				else 					   RC_Values[Channel-1] = 1023-RC_Values_LAST+temp;
-				RC_Values[Channel-1] = (RC_Values[Channel-1] - 63) * (2000 - 1000) / (125 - 63) + 125;
-				break;
-				
-		case 3: if (temp > RC_Values_LAST) RC_Values[Channel-1] = temp-RC_Values_LAST;
-				else 					   RC_Values[Channel-1] = 1023-RC_Values_LAST+temp;
-				RC_Values[Channel-1] = (RC_Values[Channel-1] - 63) * (2000 - 1000) / (125 - 63) + 125;
-				break;
-				
-		case 4: if (temp > RC_Values_LAST) RC_Values[Channel-1] = temp-RC_Values_LAST;
-				else 					   RC_Values[Channel-1] = 1023-RC_Values_LAST+temp;
-				RC_Values[Channel-1] = (RC_Values[Channel-1] - 63) * (2000 - 1000) / (125 - 63) + 125;
-				break;
-				
-		case 5: if (temp > RC_Values_LAST) RC_Values[Channel-1] = temp-RC_Values_LAST;
-				else 					   RC_Values[Channel-1] = 1023-RC_Values_LAST+temp;
-				RC_Values[Channel-1] = (RC_Values[Channel-1] - 63) * (2000 - 1000) / (125 - 63) + 125;
-				break;
-				
-		case 6: if (temp > RC_Values_LAST) RC_Values[Channel-1] = temp-RC_Values_LAST;
-				else 					   RC_Values[Channel-1] = 1023-RC_Values_LAST+temp;
-				RC_Values[Channel-1] = (RC_Values[Channel-1] - 63) * (2000 - 1000) / (125 - 63) + 125;
-				Channel = 0;
-				break;
-	}
 	
-	RC_Values_LAST = temp;
+}
+
+uint16_t Func_map(uint16_t x, uint16_t in_min, uint16_t in_max, uint16_t out_min, uint16_t out_max)
+{
+	return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
 void timer2_Init(void)
