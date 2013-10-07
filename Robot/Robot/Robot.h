@@ -36,6 +36,9 @@ void WriteCamPosition(void);
 void AcquireDataSensor(void);
 void SendDataSensor(void);
 
+/* prototypes des fonctions dédiées au timer0 */
+void timer0_Init(void);
+
 /* prototypes des fonctions dédiées au timer1 */
 void timer1_Init(void);
 

@@ -29,11 +29,7 @@ int main(void)
     {
 		if (receptionRC_OK)
 		{
-			RequireCamPosition();		// Demande de données sur la commande de la caméra
-			ReceiveCamPosition();		// Routine de réception des données séries
 			
-			AcquireDataSensor();
-			SendDataSensor();
 			
 			receptionRC_OK = false;
 		}
@@ -43,6 +39,23 @@ int main(void)
 void ioInit(void)
 {
 	DDRB  |= 0b00000110;
+}
+
+void timer0_Init( void )
+{
+	TCCR0A = 0x02;
+	TCCR0B = 0x05;
+	TIMSK0 = 0x01;
+	OCR0A  = 172;
+}
+
+ISR(TIMER0_OVF_vect)
+{
+	RequireCamPosition();		// Demande de données sur la commande de la caméra
+	ReceiveCamPosition();		// Routine de réception des données séries
+	
+	AcquireDataSensor();
+	SendDataSensor();
 }
 
 void timer1_Init(void)
