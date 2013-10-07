@@ -43,10 +43,10 @@ void ioInit( void )
 
 void SendDataCam(void)
 {
-	Xbee_transmit_data();
-	Xbee_transmit_data();
-	Xbee_transmit_data();
-	Xbee_transmit_data();
+	Xbee_transmit_data(0xEF);
+	Xbee_transmit_data(DataCamPosition[0]);
+	Xbee_transmit_data(DataCamPosition[1]);
+	Xbee_transmit_data(0xFE);
 }
 
 ISR(USART_RX_vect)

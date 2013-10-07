@@ -20,7 +20,7 @@ extern volatile uint8_t DataCamPosition[2];
 // initialisation des entrées sorties
 void ioInit( void );
 
-// fopnction du timer 1
+// fonction du timer 1
 void timer1_Init(void);
 
 /* prototypes des fonctions dédiées à l'i²C */
@@ -35,13 +35,9 @@ char I2C_receive_NACK(void);
 void ERROR(void);
 
 /* prototypes des fonctions dédiées à l'IMU3000 */
-void IMU3000_Init(void);
-void Read_IMU_3000_data(void);
-uint8_t Read_IMU_3000(int8_t registre);
-void Write_IMU_3000(uint8_t registre, uint8_t data);
-	// prototypes des fonctions dédiées au gyroscope
-	void gyroCalibration(void);
-	void UpdateGyroValues(void);
+void mpu6050_Init(void);
+uint8_t Read_mpu6050(int8_t registre);
+void Write_mpu6050(uint8_t registre, uint8_t data);
 
 /* prototypes des fonctions dédiées au Xbee */
 +void Xbee_Init(void);

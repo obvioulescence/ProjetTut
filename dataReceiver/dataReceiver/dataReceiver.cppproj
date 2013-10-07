@@ -132,6 +132,9 @@
     <Compile Include="I2C.cpp">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="MPU6050.cpp">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="XBee.cpp">
       <SubType>compile</SubType>
     </Compile>
