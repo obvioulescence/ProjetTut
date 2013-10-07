@@ -2,7 +2,7 @@
  * Definitions.h
  *
  * Created: 02/10/2013 14:46:13
- *  Author: Antoine Galvaire
+ *  Author: Antoine
  */ 
 
 

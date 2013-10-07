@@ -1,9 +1,10 @@
 /*
- * dataReceiver.cpp
+ * dataReceiver.h
  *
- * Created: 01/10/2013 18:11:31
- *  Author: ClementC
- */ 
+ * Created: 02/10/2013 14:40:45
+ *  Author: Antoine
+ */
+ 
 
 #include "dataReceiver.h"
 
@@ -11,10 +12,12 @@ int main(void)
 {
 	//Initialization
 	I2C_Init();
-    while(1)
-    {
+	
+	while(1)
+	{
 		
-    }
+	}
+   
 }
 
 void ioInit( void )

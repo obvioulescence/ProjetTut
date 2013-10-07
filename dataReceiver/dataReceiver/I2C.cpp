@@ -9,7 +9,6 @@
 
 void I2C_Init(void)
 {
-   
 
 // Enable internal pull up for SDA et SCL pins
 	/*MCUCR &=~(1<<PUD);

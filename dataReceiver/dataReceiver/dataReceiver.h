@@ -2,7 +2,7 @@
  * dataReceiver.h
  *
  * Created: 02/10/2013 14:40:45
- *  Author: Antoine Galvaire
+ *  Author: Antoine
  */ 
 
 #include "Definitions.h"
