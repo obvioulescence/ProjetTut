@@ -13,9 +13,11 @@
 //==========================================================
 //==========================================================
 extern volatile uint8_t Data_RX[3];
-extern volatile static uint8_t nb_INT;
+extern volatile uint8_t nb_INT;
 extern volatile uint8_t DataCamPosition[2];
 //==========================================================
+
+void SendDataCam(void);
 
 // initialisation des entrées sorties
 void ioInit( void );
@@ -40,12 +42,12 @@ uint8_t Read_mpu6050(int8_t registre);
 void Write_mpu6050(uint8_t registre, uint8_t data);
 
 /* prototypes des fonctions dédiées au Xbee */
-+void Xbee_Init(void);
-+uint16_t Xbee_ReceiveByte(uint16_t timeout);
-+uint8_t Xbee_Byte_Available(void);
-+void Xbee_transmit_data(int8_t data);
-+void Xbee_transmit_string(char string[]);
-+void Xbee_transmit_carriage_return(void);
+void Xbee_Init(void);
+uint16_t Xbee_ReceiveByte(uint16_t timeout);
+uint8_t Xbee_Byte_Available(void);
+void Xbee_transmit_data(int8_t data);
+void Xbee_transmit_string(char string[]);
+void Xbee_transmit_carriage_return(void);
 	
 	
 

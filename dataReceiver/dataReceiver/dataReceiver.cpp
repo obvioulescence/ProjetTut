@@ -9,7 +9,7 @@
 #include "dataReceiver.h"
 
 volatile uint8_t Data_RX[3]         = {0};
-volatile static uint8_t nb_INT      =  0;
+volatile uint8_t nb_INT				=  0;
 const uint8_t Data_RX_format[3]     = {0xFF, 0xAA, 0xEE};
 volatile uint8_t DataCamPosition[2] = {94, 94};
 
@@ -31,6 +31,7 @@ int main(void)
 					break;
 			
 			if (i == 3)	SendDataCam();
+			else ; //c'est la merde
 		}
 	}
    
@@ -53,15 +54,15 @@ ISR(USART_RX_vect)
 {
 	nb_INT++;
 	
-	switch (i)
+	switch (nb_INT)
 	{
-		case 1: Data_RX[i] = UDR0;
+		case 1: Data_RX[nb_INT - 1] = UDR0;
 		break;
 		
-		case 2: Data_RX[i] = UDR0;
+		case 2: Data_RX[nb_INT - 1] = UDR0;
 		break;
 		
-		case 3: Data_RX[i] = UDR0;
+		case 3: Data_RX[nb_INT - 1] = UDR0;
 		break;
 	}
 }

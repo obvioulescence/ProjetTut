@@ -14,14 +14,30 @@ void RequireCamPosition(void)
 	Xbee_transmit_data(0xEE);
 }
 
-bool ReceiveCamPosition(void)
+ISR(USART1_RX_vect)
+{
+	volatile static uint8_t Cursor = 0;
+
+	UART_RX[Cursor] = UDR1;
+
+	if (Cursor == (3))
+	{
+		Cursor = 0;
+		UCSR1B |= (1<<TXC1);
+		UDR1 = UART_TX[0];		// Début de la phase TX
+	}
+	else
+		Cursor++;
+}
+
+bool ReceiveCamPosition(uint16_t timeout)
 {
 	uint16_t temp    =  0;
 	uint8_t  data[4] = {0};
 
 	for (uint8_t i = 0 ; i<4 ; i++)
 	{
-		temp = Xbee_ReceiveByte(200);
+		temp = Xbee_ReceiveByte(timeout);
 			if (temp == 0x0100) return false;
 			else data[i] = temp;
 	}
@@ -41,7 +57,10 @@ bool ReceiveCamPosition(void)
 	return true;
 }
 
-void WriteCamPosition(void)
+void WriteCamPosition(bool timeout)
 {
-	WriteServo(camPosition[0], camPosition[1]);
+	if (!timeout)
+		WriteServo(camPosition[0], camPosition[1]);
+	else
+		WriteServo(1500,1500);
 }

@@ -7,46 +7,36 @@
 
 #include "Robot.h"
 
-ISR(TIMER1_CAPT_vect)
+void RC_Init(void)
 {
-	volatile static uint16_t RC_Values_LAST = 0;
-	volatile static uint8_t  Channel		= 0;
-	volatile        uint16_t temp			= 0;
-
-	temp = ICR1;
-	Channel++;
-
-	switch (Channel)
-	{
-		case 1: break;
-		
-		case 2: if (temp > RC_Values_LAST) RC_Values[Channel-1] = temp-RC_Values_LAST;
-				else 					   RC_Values[Channel-1] = 1023-RC_Values_LAST+temp;
-				RC_Values[Channel-1] = Func_map(RC_Values[Channel-1], 63, 125, 1000, 2000);
-		break;
-		
-		case 3: if (temp > RC_Values_LAST) RC_Values[Channel-1] = temp-RC_Values_LAST;
-				else 					   RC_Values[Channel-1] = 1023-RC_Values_LAST+temp;
-				RC_Values[Channel-1] = Func_map(RC_Values[Channel-1], 63, 125, 1000, 2000);
-		break;
-		
-		case 4: if (temp > RC_Values_LAST) RC_Values[Channel-1] = temp-RC_Values_LAST;
-				else 					   RC_Values[Channel-1] = 1023-RC_Values_LAST+temp;
-				RC_Values[Channel-1] = Func_map(RC_Values[Channel-1], 63, 125, 1000, 2000);
-		break;
-		
-		case 5: if (temp > RC_Values_LAST) RC_Values[Channel-1] = temp-RC_Values_LAST;
-				else 					   RC_Values[Channel-1] = 1023-RC_Values_LAST+temp;
-				RC_Values[Channel-1] = Func_map(RC_Values[Channel-1], 63, 125, 1000, 2000);
-		break;
-		
-		case 6: if (temp > RC_Values_LAST) RC_Values[Channel-1] = temp-RC_Values_LAST;
-				else 					   RC_Values[Channel-1] = 1023-RC_Values_LAST+temp;
-				RC_Values[Channel-1] = Func_map(RC_Values[Channel-1], 63, 125, 1000, 2000);
-				Channel = 0;
-				receptionRC_OK = true;
-		break;
-	}
-	
-	RC_Values_LAST = temp;
+	// initialisation du timer3 pour IC
+	timer3_Init();
 }
+
+void timer3_Init(void)
+{
+	TCCR3A = 0;
+	TCCR3B = 1<<ICES3 | 1<<CS31;
+	TIMSK3 = 1<<ICIE3;
+	TIFR3  = 0xFF;
+}
+
+ISR(TIMER3_CAPT_vect)
+{
+	volatile static uint8_t  chan = 0;
+	volatile		uint16_t temp = 0;
+	
+	temp = ICR3 / 2;
+	TCNT3 = 0;
+	
+	sei();
+	
+	if (temp > 3000)
+	chan = 0;
+	
+	if (temp >= 800 && temp <= 2200)
+	RC_Values[chan] = temp;
+	
+	chan++;
+}
+

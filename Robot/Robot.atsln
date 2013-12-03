@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Atmel Studio Solution File, Format Version 11.00
-Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "Robot", "Robot\Robot.cppproj", "{D6E15F86-CC4E-48D6-8A56-5830AB32A9C8}"
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "Robot", "Robot\Robot.cppproj", "{5B4B970C-D0EF-43C4-879C-0BF4C58FCA28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|AVR = Release|AVR
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D6E15F86-CC4E-48D6-8A56-5830AB32A9C8}.Debug|AVR.ActiveCfg = Debug|AVR
-		{D6E15F86-CC4E-48D6-8A56-5830AB32A9C8}.Debug|AVR.Build.0 = Debug|AVR
-		{D6E15F86-CC4E-48D6-8A56-5830AB32A9C8}.Release|AVR.ActiveCfg = Release|AVR
-		{D6E15F86-CC4E-48D6-8A56-5830AB32A9C8}.Release|AVR.Build.0 = Release|AVR
+		{5B4B970C-D0EF-43C4-879C-0BF4C58FCA28}.Debug|AVR.ActiveCfg = Debug|AVR
+		{5B4B970C-D0EF-43C4-879C-0BF4C58FCA28}.Debug|AVR.Build.0 = Debug|AVR
+		{5B4B970C-D0EF-43C4-879C-0BF4C58FCA28}.Release|AVR.ActiveCfg = Release|AVR
+		{5B4B970C-D0EF-43C4-879C-0BF4C58FCA28}.Release|AVR.Build.0 = Release|AVR
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

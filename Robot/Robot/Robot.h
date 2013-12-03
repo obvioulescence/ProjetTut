@@ -14,36 +14,41 @@
 //================= VARIABLES GLOBALES =====================
 //==========================================================
 
-extern volatile uint64_t microseconds;		// compteur de microsecondes
-extern volatile uint16_t RC_Values[5];		// tableau contenant les microsecondes des impulsions radio
-extern volatile bool     receptionRC_OK;	// Information sur l'état de la réception RC
+extern volatile uint16_t RC_Values[6];		// tableau contenant les microsecondes des impulsions radio
 extern volatile uint16_t camPosition[2];	// position de la caméra X Z
-
+extern volatile uint8_t  UART_RX[4];		// Buffer de réception
+extern volatile uint8_t  UART_TX[12];		// Buffer de transmission
+extern volatile int16_t  U1;				// loi de commande translation
+extern volatile int16_t  U2;				// loi de commande rotation
 
 // initialisation des entrées sorties
 void ioInit(void);
 
-/* prototypes des fonctions dédiées à la gestion des servos ; Angle entre 63 et 125*/
+/* prototypes des fonctions dédiés à la réception RC */
+void RC_Init(void);
+
+/* prototypes des fonctions dédiées à la gestion des servos ; Angle entre 1000 et 2000*/
 void ServoInit(void);
-void WriteServo(uint8_t Angle_X, uint8_t Angle_Z);
+void WriteServo(uint16_t Angle_X, uint16_t Angle_Z);
+
+/* prototyps des fonctions pour les moteurs */
+void MoteurInit(void);
+void computeMotors(void);
 
 /* prototypes des fonctions dédiées à la gestion de la caméra */
 void RequireCamPosition(void);
-bool ReceiveCamPosition(void);
-void WriteCamPosition(void);
+bool ReceiveCamPosition(uint16_t timeout);
+void WriteCamPosition(bool timeout = false);
 
 /* fonctions dédiés à la gestion des capteurs */
 void AcquireDataSensor(void);
 void SendDataSensor(void);
 
-/* prototypes des fonctions dédiées au timer0 */
-void timer0_Init(void);
-
-/* prototypes des fonctions dédiées au timer1 */
-void timer1_Init(void);
-
-/* prototypes des fonctions dédiées au timer2 */
-void timer2_Init(void);
+/* prototypes des fonctions dédiées aux timer */ 
+void timer3_Init(void);							// interruption 10ms
+void timer1_Init(void);							// PWM servos
+void timer0_Init(void);							// input capture (PPM)
+void timer4_Init(void);							// PWM moteurs
 
 /* prototypes des fonctions dédiées à l'i²C */
 void I2C_Init(void);
@@ -60,7 +65,7 @@ void ERROR(void);
 void Xbee_Init(void);
 uint16_t Xbee_ReceiveByte(uint16_t timeout);
 uint8_t Xbee_Byte_Available(void);
-void Xbee_transmit_data(int8_t data);
+void Xbee_transmit_data(uint8_t data);
 void Xbee_transmit_string(char string[]);
 void Xbee_transmit_carriage_return(void);
 
@@ -74,6 +79,6 @@ void Write_IMU_3000(uint8_t registre, uint8_t data);
  void UpdateGyroValues(void);
  
 // fonctions mathématiques
-uint16_t Func_map(uint16_t x, uint16_t in_min, uint16_t in_max, uint16_t out_min, uint16_t out_max);
+uint8_t Func_map(uint16_t x, uint16_t in_min, uint16_t in_max, uint16_t out_min, uint16_t out_max);
 
 #endif /* ROBOT_H_ */

@@ -19,7 +19,7 @@
 #define DEFINITIONS_H_
 
 //definition.h
-#define UBRRVAL0	8	// XBee baud rate 115200
+#define UBRRVAL1	8	// XBee baud rate 38400
 
 #define X			0
 #define Y			1
@@ -28,7 +28,19 @@
 #define NB_CHAN_RC	5
 
 #define SERVO_X		OCR1A
-#define SERVO_Z		OCR1B
+#define SERVO_Z		OCR1C
+
+#define MOT1		OCR4B
+#define MOT2		OCR4D
+#define MOT1_REV	PORTD&=~0x10;PORTC|=0x40
+#define MOT1_FWD	PORTD|=0x10;PORTC&=~0x40
+#define MOT2_REV	PORTE&=~0x40;PORTB|=0x10
+#define MOT2_FWD	PORTE|=0x40;PORTB&=~0x10
+
+#define TIMEOUT		true
+
+#define NB_TX		12
+#define NB_RX		4
 
 // I2C status definition
 #define STATUS_START			0x08

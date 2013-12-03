@@ -9,7 +9,7 @@
 
 void I2C_Init(void)
 {
-	PRR &= ~(1<<PRTWI); // enables the I2C module
+	//PRR0 &= ~(1<<PRTWI); // enables the I2C module
 
 // Enable internal pull up for SDA et SCL pins
 	/*MCUCR &=~(1<<PUD);
@@ -63,9 +63,9 @@ void I2C_status_check(char status)
 
 char I2C_receive_ACK(void)
 {
-	TWCR = (1<<TWINT)|(1<<TWEN)|(1<<TWEA);     
-	while (!(TWCR & (1<<TWINT)));     
-	return TWDR;  
+	TWCR = (1<<TWINT)|(1<<TWEN)|(1<<TWEA);
+	while (!(TWCR & (1<<TWINT)));
+	return TWDR;
 }
 
 char I2C_receive_NACK(void)

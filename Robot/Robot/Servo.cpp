@@ -7,13 +7,21 @@
 
 #include "Robot.h"
 
-void ServoInit(void)
+void timer1_Init(void)
 {
-	WriteServo(94, 94);
+	TCCR1A = 0x8A; // COM1A1 | COM1C1 | WGM11
+	TCCR1B = 0x1A; // WGM12  | WGM13  | CS11
+	ICR1   = 39999;
 }
 
-void WriteServo(uint8_t Angle_X, uint8_t Angle_Z)
+void ServoInit(void)
 {
-	SERVO_X = ((Angle_X >= 63) && (Angle_X <= 125)) ? Angle_X : SERVO_X;
-	SERVO_Z = ((Angle_Z >= 63) && (Angle_Z <= 125)) ? Angle_Z : SERVO_Z;
+	timer1_Init();
+	WriteServo(2000, 4000);
+}
+
+void WriteServo(uint16_t Angle_X, uint16_t Angle_Z)
+{
+	SERVO_X = ((Angle_X >= 2000) && (Angle_X <= 4000)) ? Angle_X : SERVO_X;
+	SERVO_Z = ((Angle_Z >= 2000) && (Angle_Z <= 4000)) ? Angle_Z : SERVO_Z;
 }
