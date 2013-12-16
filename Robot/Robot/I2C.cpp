@@ -30,7 +30,7 @@ void I2C_Init(void)
 void I2C_start(void)
 {
 	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);  // clear the TWINT flag
-    
+
 	while (!(TWCR & (1<<TWINT)));
 		//if((TWSR & 0xF8) !=0x08) ERROR();   
 }
@@ -53,7 +53,6 @@ void I2C_restart(void)
 	TWCR=(1<<TWINT)|(1<<TWSTA)|(1<<TWEN);
 	while (!(TWCR & (1<<TWINT)));
 	//if((TWSR & 0xF8) !=0x10) ERROR();
-
 }
 
 void I2C_status_check(char status)

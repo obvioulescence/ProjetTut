@@ -7,12 +7,13 @@
 
 #include "Robot.h"
 
-volatile uint16_t RC_Values[6]   = {0};
-volatile uint16_t camPosition[2] = {1500, 1500};
-volatile uint8_t  UART_RX[4]	 = {0};
-volatile uint8_t  UART_TX[12]	 = {0x46, 0x75, 0x63, 0x6B, 0x69, 0x6E, 0x67, 0x20, 0x74, 0x72, 0x79, 0x0D};
-volatile int16_t  U1			 = 0;
-volatile int16_t  U2			 = 0;
+volatile uint16_t RC_Values[6]		= {0};
+volatile uint16_t camPosition[2]	= {1500, 1500};
+volatile uint8_t  UART_RX[NB_RX]	= {0};
+volatile uint8_t  UART_TX[NB_TX]	= {0xFF, 0, 0, 0, 0, 0, 0, 0, 0xEE};
+volatile int16_t  U1				= 0;
+volatile int16_t  U2				= 0;
+volatile bool	  _sensorCom_ready	= false;
 
 int main(void)
 {
@@ -25,18 +26,18 @@ int main(void)
 	I2C_Init();
 	ServoInit();
 	MoteurInit();
-	
+	SensorInit();
+
 	sei();
-	
+
 	while(1)
 	{
-		/*if (ReceiveCamPosition(10000))   // Routine de réception des données séries
-			WriteCamPosition();		// recalibrage de l'azimut de balayage
-		else
-			WriteCamPosition(TIMEOUT);
-		
-		AcquireDataSensor();
-		SendDataSensor();*/
+		if (_sensorCom_ready)
+		{
+			AcquireDataSensor();
+			_sensorCom_ready = false;
+		}
+
 		computeMotors();
 	}
 }
@@ -59,16 +60,6 @@ void timer0_Init(void) // interruption toutes les 5 * 4ms
 }
 
 ISR(TIMER0_COMPA_vect)
-{
-	
-}
-
-void AcquireDataSensor(void)
-{
-	
-}
-
-void SendDataSensor(void)
 {
 	
 }

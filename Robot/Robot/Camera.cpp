@@ -20,7 +20,7 @@ ISR(USART1_RX_vect)
 
 	UART_RX[Cursor] = UDR1;
 
-	if (Cursor == (3))
+	if (Cursor == (NB_RX-1))
 	{
 		Cursor = 0;
 		UCSR1B |= (1<<TXC1);

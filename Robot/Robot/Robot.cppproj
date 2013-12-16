@@ -130,6 +130,9 @@
     <Compile Include="Motors.cpp">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="MPL3115A2.cpp">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="RC.cpp">
       <SubType>compile</SubType>
     </Compile>
@@ -143,6 +146,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Servo.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="TSL2561.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="XBee.cpp">
