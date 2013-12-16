@@ -38,11 +38,6 @@ void AcquireDataSensor(void)
 {
 	// Commençons par le capteur de luminosité
 	Read_TSL2561_data();
-	//Read_MPL3115A2_data();
-	UART_TX[3] = Read_MPL3115A2(OUT_P_MSB);
-	UART_TX[4] = Read_MPL3115A2(OUT_P_CSB);
-	UART_TX[5] = Read_MPL3115A2(OUT_P_LSB);
-	UART_TX[6] = Read_MPL3115A2(OUT_T_MSB);
-	UART_TX[7] = Read_MPL3115A2(OUT_T_LSB);
+	Read_MPL3115A2_data();
 	_sensorCom_ready = false;
 }
