@@ -44,12 +44,12 @@ bool ReceiveCamPosition(uint16_t timeout)
 	
 	if ((data[0] == 0xFF) && (data[3] == 0xEE))
 	{
-		if ((data[1] >= 63) && (data[1] <= 125))
-			camPosition[0] = data[1];
+		if ((data[1] >= 0) && (data[1] <= 180))
+			camPosition[0] = Func_map(data[1], 0, 180, 2000, 4000);
 		else return false;
 		
-		if ((data[2] >= 63) && (data[2] <= 125))
-			camPosition[1] = data[2];
+		if ((data[2] >= 0) && (data[2] <= 180))
+			camPosition[1] = Func_map(data[2], 0, 180, 2000, 4000);
 		else return false;
 	}
 	else return false;
@@ -62,5 +62,5 @@ void WriteCamPosition(bool timeout)
 	if (!timeout)
 		WriteServo(camPosition[0], camPosition[1]);
 	else
-		WriteServo(1500,1500);
+		WriteServo(3000,3000);
 }
